@@ -7,6 +7,24 @@ var player = {
   pos: {x: 5, y: 5}
 }
 
+var flower1 = {
+  pos: {x: 10, y: 10}
+}
+
+var flowers = [flower1];
+
+function draw() {
+  drawFlowers(this.flowers);
+  drawPlayer(this.player);
+}
+
+function drawFlowers(flowers) {
+  var i = 0;
+  for (i = 0; i < flowers.length; i++) {
+    context.fillStyle = 'red';
+    context.fillRect(flowers[i].pos.x, flowers[i].pos.x, 1, 1);
+  }
+}
 
 function drawPlayer(player) {
   context.fillStyle = 'yellow';
@@ -14,10 +32,15 @@ function drawPlayer(player) {
 }
 
 let lastTime = 0;
-function update() {
+function update(time=0) {
+    const deltaTime = time - lastTime;
+    lastTime = time;
+
     context.fillStyle = '#000';
     context.fillRect(0, 0, canvas.width, canvas.height);
-    drawPlayer(this.player);
+
+    draw();
+
     requestAnimationFrame(update);
 }
 
@@ -34,7 +57,6 @@ document.addEventListener('keydown', event => {
   if (event.keyCode === 40) {
     player.pos.y++;
   }
-  console.log(event);
 });
 
 update();
