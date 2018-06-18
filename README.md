@@ -1,7 +1,19 @@
 # hive-mind
-This is a game written in JavaScript. It is meant to be built around the
+This is a game written in JavaScript. It is built around the
 immense strategic challenges that bees go through every day in order to
-create a stable hive environment.
+create a stable hive environment. Hopefully it will educate players on the
+amazing life of bees, and also gives significant strategic challenge and
+satisfaction.
+
+### Gameplay
+* Recruit a horde of bees
+* Use them to harvest nectar and pollen from nearby flowers
+* Recruit drones to mate with your queen
+* Assign roles to different bees
+* Repel invaders with your stingers
+* Once you have enough hive members, split your hive to increase your chances
+of survival
+
 
 ### Ideas for future development:
 * Create ants, bears, mice, and other invaders
