@@ -1,0 +1,23 @@
+{
+  "name": "hive-mind",
+  "version": "1.0.0",
+  "description": "This is a game written in JavaScript. It is built around the immense strategic challenges that bees go through every day in order to create a stable hive environment. Hopefully it will educate players on the amazing life of bees, and also gives significant strategic challenge and satisfaction.",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve ./src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gcantieni/hive-mind.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gcantieni/hive-mind/issues"
+  },
+  "homepage": "https://github.com/gcantieni/hive-mind#readme",
+  "dependencies": {
+    "serve": "^9.1.0"
+  }
+}
