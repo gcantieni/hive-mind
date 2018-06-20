@@ -1,20 +1,7 @@
 import * as constants from './constants.js';
-import { HiveOrganizer } from './hive-organizer.js';
-import { FlowerOrganizer } from './flower-organizer.js';
-
-// let test = function() {
-//   console.log(test);
-// }
-//
-// class Test {
-//   constructor() { }
-//   classTest() {
-//     window.requestAnimationFrame(this.classTest);
-//   }
-// }
-// let test1 = new Test();
-// test();
-// test1.classTest();
+import { HiveOrganizer } from './hive.js';
+import { FlowerOrganizer } from './flower.js';
+import { BeeOrganizer } from './bee.js';
 
 export class Game {
   constructor(canvas, context) {
@@ -23,10 +10,7 @@ export class Game {
     this.lastTime = 0;
     this.hiveOrganizer = new HiveOrganizer(this.context);
     this.flowerOrganizer = new FlowerOrganizer(this.context);
-
-    this.hiveOrganizer.addHive(200, 200);
-    this.hiveOrganizer.addHive(300, 300);
-    this.flowerOrganizer.addFlower(260,260);
+    this.BeeOrganizer = new BeeOrganizer(this.context);
 
     const that = this;
 
@@ -39,6 +23,7 @@ export class Game {
       drawCanvas();
       this.hiveOrganizer.drawHives();
       this.flowerOrganizer.drawFlowers();
+      this.BeeOrganizer.drawBees();
     };
   }
 
@@ -47,33 +32,6 @@ export class Game {
       this.draw();
     }, 25);
   }
-  // update(time=0) {
-  //   const deltaTime = time - this.lastTime;
-  //   this.lastTime = time;
-  //
-  //   this.draw();
-  //
-  //   requestAnimationFrame(this.update);
-  // }
-
-  // show() {
-  //   document.addEventListener('keydown', event => {
-  //     if (event.keyCode === 37) {
-  //       hive.pos.x -= constants.VELOCITY;
-  //     }
-  //     else if (event.keyCode === 38) {
-  //       hive.pos.y -= constants.VELOCITY;
-  //     }
-  //     else if (event.keyCode === 39) {
-  //       hive.pos.x += constants.VELOCITY;
-  //     }
-  //     if (event.keyCode === 40) {
-  //       hive.pos.y += constants.VELOCITY;
-  //     }
-  //   });
-  //
-  //   this.update();
-  // }
 }
 
 
