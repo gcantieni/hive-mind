@@ -32,3 +32,6 @@ of survival
 bee colonies.
 
 ### Nitty-gritty ideas
+* Menu of possible objects to place
+* A sign of which object you've chosen and a translucent version that hovers
+around the mouse 
