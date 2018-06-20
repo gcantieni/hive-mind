@@ -5,6 +5,12 @@ create a stable hive environment. Hopefully it will educate players on the
 amazing life of bees, and also gives significant strategic challenge and
 satisfaction.
 
+### To run
+After cloning, either run `index.html` in a browser without stringent
+security requirements (e.g. my version of Firefox), or install npm and run
+`npm run start` and enter the specified localhost in your browser's search
+bar.
+
 ### Gameplay
 * Recruit a horde of bees
 * Use them to harvest nectar and pollen from nearby flowers
@@ -24,3 +30,5 @@ of survival
 * Add obstacles later in the game, such as pesticides
 * Add elements that raise awareness of the modern issues that keep killing off
 bee colonies.
+
+### Nitty-gritty ideas
