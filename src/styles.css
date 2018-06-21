@@ -1,7 +1,10 @@
+body {
+  padding-left: 0px;
+  padding-top: 30px;
+}
+
 canvas {
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 30;
+  padding: 0;
   margin-left: auto;
   margin-right: auto;
   display: block;
