@@ -1,5 +1,5 @@
 class Menu {
-  constructor() { }
+  constructor() {}
 
   draw() {
 

@@ -6,17 +6,9 @@ export class Listener {
     this.type = null;
   }
 
-  // listen() {
-  //   this.canvas.addEventListener('mousedown', (evt) => {
-  //     let pos = getMousePos(this.canvas, evt);
-  //
-  //     this.addBee(pos.x - constants.BEE_WIDTH / 2,
-  //                   pos.y - constants.BEE_WIDTH / 2);
-  //   });
-  // }
   setType(newType) {
     if (this.organizers[newType] === null) {
-        throw "Non-recognized type";
+      throw "Non-recognized type";
     } else {
       this.type = newType;
     }
