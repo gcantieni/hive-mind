@@ -2,23 +2,21 @@ import * as constants from './constants.js';
 import { Organizer } from './organizer.js';
 
 export class BeeOrganizer extends Organizer {
-  constructor(context) {
-    super(context);
-    this.bees = []
-    this.context = context;
-    // this.canvas = canvas;
+  constructor() {
+    super();
+    this.elements = [];
   }
 
   add(x, y) {
     let newBee = new Bee(x, y);
-    this.bees.push(newBee);
+    this.elements.push(newBee);
     return newBee;
   }
 
-  draw() {
-    this.context.fillStyle = 'yellow';
-    this.bees.map(bee =>
-      this.context.fillRect(bee.x, bee.y,
+  draw(context) {
+    context.fillStyle = constants.BEE_COLOR;
+    this.elements.map(bee =>
+      context.fillRect(bee.x, bee.y,
         constants.BEE_WIDTH, constants.BEE_WIDTH));
   }
 }

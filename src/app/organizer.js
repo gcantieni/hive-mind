@@ -1,5 +1,11 @@
 export class Organizer {
-  constructor(context) {
-    this.context = context;
+  constructor() {
+    this.elements = [];
   }
+
+  add(x, y) {
+
+  }
+
+  
 }

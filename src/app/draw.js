@@ -1,16 +1,12 @@
+import * as constants from './constants.js';
+
 export function draw(context, canvas, organizers) {
   drawCanvas(context, canvas);
-  // for (let key of organizers) {
-  //   console.log(key);
-  //   console.log("hi");
-  //   organizers[key].draw();
-  // }
-  // console.log(Array.from(organizers));
-  // console.log(organizers.forEach((o) => console.log(o)));
-  organizers.forEach(organizer => organizer.draw());
+
+  organizers.forEach(organizer => organizer.draw(context));
 }
 
 function drawCanvas(context, canvas) {
-  context.fillStyle = '#A1FFD9';
-  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = constants.BACKGROUND_COLOR;
+  context.fillRect(0, 0, constants.BOARD_WIDTH, constants.BOARD_HEIGHT);
 }

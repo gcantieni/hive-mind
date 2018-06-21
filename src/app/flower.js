@@ -2,22 +2,26 @@ import * as constants from './constants.js';
 import { Organizer } from './organizer.js';
 
 export class FlowerOrganizer extends Organizer {
-  constructor(context) {
-    super(context);
-    this.flowers = [];
+  constructor() {
+    super();
+    this.elements = [];
     this.width = constants.FLOWER_WIDTH;
   }
 
-  draw() {
-    this.context.fillStyle = 'red';
-    this.flowers.map((flower) => {
-      this.context.fillRect(flower.x, flower.y, constants.FLOWER_WIDTH,constants.FLOWER_WIDTH);
+  draw(context) {
+    context.fillStyle = constants.FLOWER_COLOR;
+    this.elements.map((flower) => {
+      // this.context.fillStyle = flower.color;
+      context.fillRect(flower.x - constants.FLOWER_WIDTH / 2,
+        flower.y- constants.FLOWER_WIDTH / 2,
+        constants.FLOWER_WIDTH,
+        constants.FLOWER_WIDTH);
     });
   }
 
   add(x, y, color) {
     let newFlower = new Flower(x, y, color);
-    this.flowers.push(newFlower);
+    this.elements.push(newFlower);
     return newFlower;
   }
 }
