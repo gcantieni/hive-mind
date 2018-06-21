@@ -1,19 +1,20 @@
 import * as constants from './constants.js';
+import { Organizer } from './organizer.js';
 
-export class FlowerOrganizer {
+export class FlowerOrganizer extends Organizer {
   constructor(context) {
+    super(context);
     this.flowers = [];
-    this.context = context;
   }
 
-  drawFlowers(context) {
+  draw() {
     this.context.fillStyle = 'red';
     this.flowers.map((flower) => {
       this.context.fillRect(flower.x, flower.y, constants.FLOWER_WIDTH,constants.FLOWER_WIDTH);
     });
   }
 
-  addFlower(x, y, color) {
+  add(x, y, color) {
     this.flowers.push(new Flower(x, y, color));
   }
 }
