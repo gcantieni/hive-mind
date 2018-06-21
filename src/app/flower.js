@@ -5,6 +5,7 @@ export class FlowerOrganizer extends Organizer {
   constructor(context) {
     super(context);
     this.flowers = [];
+    this.width = constants.FLOWER_WIDTH;
   }
 
   draw() {
@@ -15,7 +16,9 @@ export class FlowerOrganizer extends Organizer {
   }
 
   add(x, y, color) {
-    this.flowers.push(new Flower(x, y, color));
+    let newFlower = new Flower(x, y, color);
+    this.flowers.push(newFlower);
+    return newFlower;
   }
 }
 
@@ -23,6 +26,7 @@ export class Flower {
   constructor(x, y, color) {
     this.x = x;
     this.y = y;
+    this.width = constants.FLOWER_WIDTH;
     this.color = color;
   }
 
