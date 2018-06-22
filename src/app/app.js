@@ -4,6 +4,7 @@ import { FlowerOrganizer } from './flower.js';
 import { BeeOrganizer } from './bee.js';
 import { draw } from './draw.js';
 import { Listener } from './listener.js';
+import { Menu } from './menu.js';
 
 function main() {
   const canvas = document.getElementById('board');
@@ -17,7 +18,10 @@ function main() {
     ['bee', new BeeOrganizer()]
   ]);
 
-  let listener = new Listener(organizers);
+
+  let menu = new Menu();
+
+  let listener = new Listener(menu, organizers);
   listener.setType('flower');
   listener.listen(canvas);
 
@@ -27,7 +31,7 @@ function main() {
   function update(time = 0) {
     let progress = time - start;
     if (!start) start = time;
-    draw(context, canvas, organizers);
+    draw(context, organizers, menu);
     window.requestAnimationFrame(update)
   }
 }

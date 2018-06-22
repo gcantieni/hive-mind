@@ -22,8 +22,7 @@ export class HiveOrganizer extends Organizer {
   }
 
   draw(context) {
-    context.fillStyle = constants.HIVE_COLOR;
-    console.log(context);
+    context.fillStyle = constants.HIVE_COLOR;  
     this.elements.map((hive) => {
       context.fillRect(
         hive.x - constants.HIVE_WIDTH / 2,
