@@ -12,12 +12,14 @@ function main() {
   canvas.height = constants.BOARD_HEIGHT;
   const context = board.getContext('2d');
 
+  //TODO make off-screen clickCanvas for logical click detection
+  // const clickCanvas =
+
   let organizers = new Map([
     ['hive', new HiveOrganizer()],
     ['flower', new FlowerOrganizer()],
     ['bee', new BeeOrganizer()]
   ]);
-
 
   let menu = new Menu();
 

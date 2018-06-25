@@ -1,8 +1,10 @@
 import * as constants from './constants.js';
 
 export class Listener {
-  constructor(organizers) {
+  constructor(menu, organizers) {
+    this.menu = menu;
     this.organizers = organizers;
+
     this.type = null;
   }
 
