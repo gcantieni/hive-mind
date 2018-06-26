@@ -1,7 +1,8 @@
 import * as constants from './constants.js';
-import { HiveOrganizer } from './hive.js';
-import { FlowerOrganizer } from './flower.js';
-import { BeeOrganizer } from './bee.js';
+// import { HiveOrganizer } from './hive.js';
+// import { FlowerOrganizer } from './flower.js';
+// import { BeeOrganizer } from './bee.js';
+import { Organizer } from './organizer.js';
 import { draw } from './draw.js';
 import { Listener } from './listener.js';
 import { Menu } from './menu.js';
@@ -18,16 +19,18 @@ function main() {
   const clickContext = clickCanvas.getContext('2d');
 
   let clickables = new Map();
-
-
-
+  // let hiveOrganizer = new Organizer('hive', clickables);
+  // hiveOrganizer.add(20, 20);
+  // hiveOrganizer.draw(context);
   let organizers = new Map([
-    ['hive', new HiveOrganizer()],
-    ['flower', new FlowerOrganizer(clickables)],
-    ['bee', new BeeOrganizer()]
+    ['hive', new Organizer('hive', clickables)],
+    ['flower', new Organizer('flower', clickables)],
+    ['bee', new Organizer('bee', clickables)]
   ]);
 
-  organizers.get('flower').add(20, 20)
+  organizers.get('flower').add(20, 20);
+  organizers.get('flower').draw(context, clickContext);
+
   let menu = new Menu();
 
   let listener = new Listener(menu, organizers, clickables);

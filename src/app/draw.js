@@ -1,10 +1,10 @@
 import * as constants from './constants.js';
 
-export function draw(context, organizers, menu) {
+export function draw(context, clickContext, organizers, menu) {
   // load menu first so it appears on top
   menu.load().then(resolve => {
     drawCanvas(context);
-    organizers.forEach(organizer => organizer.draw(context));
+    organizers.forEach(organizer => organizer.draw(context, clickContext));
     menu.draw(context);
   });
 }
