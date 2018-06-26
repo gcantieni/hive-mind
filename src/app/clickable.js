@@ -40,11 +40,9 @@ export class Clickable {
       return;
     }
   }
-
-  // drawClickable(clickableContext) {
-  //   clickableContext.fillStyle = this.clickColor;
-  //   clickableContext.fillRect(this.x - this.width / 2, this.y - this.width / 2, this.width, this.height);
-  // }
+  handleClick(type) {
+    console.log(`clicked on ${this}`);
+  }
 
   getRandomColor() {
    const r = Math.round(Math.random() * 255);

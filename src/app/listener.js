@@ -5,6 +5,7 @@ export class Listener {
     this.menu = menu;
     this.organizers = organizers;
     this.clickables = clickables;
+    this.addMode = false;
 
     this.type = null;
   }
@@ -17,6 +18,14 @@ export class Listener {
     }
   }
 
+  changeMode() {
+    if (this.addMode) {
+      this.addMode = false;
+    } else {
+      this.addMode = true;
+    }
+  }
+
   listen(canvas, clickContext) {
     canvas.addEventListener('click', e => {
 
@@ -24,16 +33,15 @@ export class Listener {
         x: e.clientX - canvas.offsetLeft,
         y: e.clientY - canvas.offsetTop
       };
-      if (this.type === null) {
-        const pixelColor = clickContext.getImageData(mousePos.x, mousePos.y, 1, 1).data;
-        const color = `rgb(${pixelColor[0]},${pixelColor[1]},${pixelColor[2]})`;
-        if (this.clickables.get(color)) {
-          console.log("clicked on a clickable!");
-        }
-      } else {
+
+      const pixelColor = clickContext.getImageData(mousePos.x, mousePos.y, 1, 1).data;
+      const color = `rgb(${pixelColor[0]},${pixelColor[1]},${pixelColor[2]})`;
+      const clickable = this.clickables.get(color);
+      if (clickable) {
+        clickable.handleClick(this);
+      } else if (this.addMode) {
         this.organizers.get(this.type).add(mousePos.x, mousePos.y);
       }
-
     });
   }
 }

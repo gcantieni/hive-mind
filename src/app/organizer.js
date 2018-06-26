@@ -1,3 +1,4 @@
+import * as constants from './constants.js'
 import { Hive } from './hive.js';
 import { Flower } from './flower.js';
 import { Bee } from './bee.js';
@@ -15,13 +16,13 @@ export class Organizer {
   add(x, y) {
     switch (this.type) {
       case 'hive':
-        this.elements.push(new Hive(x, y, this.clickables));
+        this.elements.push(new Hive(x - constants.HIVE_WIDTH / 2, y - constants.HIVE_WIDTH / 2, this.clickables));
         break;
       case 'flower':
-        this.elements.push(new Flower(x, y, this.clickables));
+        this.elements.push(new Flower(x - constants.FLOWER_WIDTH / 2, y - constants.FLOWER_WIDTH / 2, this.clickables));
         break;
       case 'bee':
-        this.elements.push(new Bee(x, y, this.clickables));
+        this.elements.push(new Bee(x - constants.BEE_WIDTH / 2, y - constants.BEE_WIDTH / 2, this.clickables));
         break;
       default:
 

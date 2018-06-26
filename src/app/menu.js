@@ -6,11 +6,13 @@ export class Menu {
   constructor(clickables) {
     this.buttons = new Map([
       ['hive', new MenuButton(
+          'hive',
           '/img/hive.png',
           0,
           constants.BOARD_HEIGHT - constants.BUTTON_WIDTH,
           clickables)],
       ['bee', new MenuButton(
+          'bee',
           '/img/bee.png',
           constants.BUTTON_WIDTH + constants.MENU_PADDING,
           constants.BOARD_HEIGHT - constants.BUTTON_WIDTH,
@@ -37,8 +39,9 @@ export class Menu {
 
 
 class MenuButton extends Clickable {
-  constructor(url, x, y, clickablesMap) {
+  constructor(type, url, x, y, clickablesMap) {
     super(x, y, constants.BUTTON_WIDTH, constants.BUTTON_WIDTH, null, clickablesMap);
+    this.type = type;
     this.url = url;
     this.img = null;
   }
@@ -52,5 +55,9 @@ class MenuButton extends Clickable {
   }
   load() {
     return loadImage(this.url);
+  }
+  handleClick(listener) {
+    listener.setType(this.type);
+    listener.changeMode();
   }
 }

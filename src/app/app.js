@@ -1,7 +1,4 @@
 import * as constants from './constants.js';
-// import { HiveOrganizer } from './hive.js';
-// import { FlowerOrganizer } from './flower.js';
-// import { BeeOrganizer } from './bee.js';
 import { Organizer } from './organizer.js';
 import { draw } from './draw.js';
 import { Listener } from './listener.js';
@@ -17,29 +14,19 @@ function main() {
   clickCanvas.width = constants.BOARD_WIDTH;
   clickCanvas.height = constants.BOARD_HEIGHT;
   const clickContext = clickCanvas.getContext('2d');
-  console.log(clickContext);
 
   let clickables = new Map();
-  // let hiveOrganizer = new Organizer('hive', clickables);
-  // hiveOrganizer.add(20, 20);
-  // hiveOrganizer.draw(context);
+
   let organizers = new Map([
     ['hive', new Organizer('hive', clickables)],
     ['flower', new Organizer('flower', clickables)],
     ['bee', new Organizer('bee', clickables)]
   ]);
 
-  organizers.get('flower').add(20, 20);
-  // organizers.get('flower').draw(context, clickContext);
-  // organizer.get('hive')
-
   let menu = new Menu(clickables);
 
   let listener = new Listener(menu, organizers, clickables);
   listener.listen(canvas, clickContext);
-  organizers.get('flower').add(20, 20);
-  organizers.get('hive').add(300, 200);
-  organizers.get('bee').add(400, 300);
 
   let start = null;
   update(0);
@@ -48,7 +35,6 @@ function main() {
     let progress = time - start;
     if (!start) start = time;
     draw(context, clickContext, organizers, menu);
-    // organizers.get('flower').draw(context, clickContext);
     window.requestAnimationFrame(update)
   }
 }
