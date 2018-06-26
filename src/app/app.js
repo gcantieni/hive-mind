@@ -19,17 +19,6 @@ function main() {
 
   let clickables = new Map();
 
-  canvas.addEventListener('click', e => {
-    const mousePos = {
-      x: e.clientX - canvas.offsetLeft,
-      y: e.clientY - canvas.offsetTop
-    };
-    const pixelColor = clickContext.getImageData(mousePos.x, mousePos.y, 1, 1).data;
-    const color = `rgb(${pixelColor[0]},${pixelColor[1]},${pixelColor[2]})`;
-    if (clickables.get(color)) {
-      console.log("clicked on a clickable!");
-    }
-  })
 
 
   let organizers = new Map([
@@ -40,9 +29,9 @@ function main() {
 
   let menu = new Menu();
 
-  let listener = new Listener(menu, organizers);
+  let listener = new Listener(menu, organizers, clickables);
   listener.setType('flower');
-  listener.listen(canvas);
+  listener.listen(canvas, clickContext);
   organizers.get('flower').add(20, 20);
 
   let start = null;

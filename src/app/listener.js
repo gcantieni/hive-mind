@@ -1,9 +1,10 @@
 import * as constants from './constants.js';
 
 export class Listener {
-  constructor(menu, organizers) {
+  constructor(menu, organizers, clickables) {
     this.menu = menu;
     this.organizers = organizers;
+    this.clickables = clickables;
 
     this.type = null;
   }
@@ -16,10 +17,26 @@ export class Listener {
     }
   }
 
-  listen(canvas) {
+  listen(canvas, clickContext) {
     canvas.addEventListener('mousedown', evt => {
-      let pos = getMousePos(canvas, evt);
-      this.organizers.get(this.type).add(pos.x, pos.y);
+
+
+    });
+
+    canvas.addEventListener('click', e => {
+
+      const mousePos = {
+        x: e.clientX - canvas.offsetLeft,
+        y: e.clientY - canvas.offsetTop
+      };
+
+      this.organizers.get(this.type).add(mousePos.x, mousePos.y);
+
+      const pixelColor = clickContext.getImageData(mousePos.x, mousePos.y, 1, 1).data;
+      const color = `rgb(${pixelColor[0]},${pixelColor[1]},${pixelColor[2]})`;
+      if (this.clickables.get(color)) {
+        console.log("clicked on a clickable!");
+      }
     });
   }
 }
