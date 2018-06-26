@@ -27,10 +27,10 @@ function main() {
     ['bee', new BeeOrganizer()]
   ]);
 
+  organizers.get('flower').add(20, 20)
   let menu = new Menu();
 
   let listener = new Listener(menu, organizers, clickables);
-  listener.setType('flower');
   listener.listen(canvas, clickContext);
   organizers.get('flower').add(20, 20);
 

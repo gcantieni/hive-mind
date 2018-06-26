@@ -18,7 +18,7 @@ export class FlowerOrganizer {
     });
   }
 
-  add(x, y, color) {
+  add(x, y, color = constants.FLOWER_COLOR) {
     let newFlower = new Flower(x, y, color, this.clickables);
     this.elements.push(newFlower);
     return newFlower;

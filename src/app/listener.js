@@ -18,25 +18,22 @@ export class Listener {
   }
 
   listen(canvas, clickContext) {
-    canvas.addEventListener('mousedown', evt => {
-
-
-    });
-
     canvas.addEventListener('click', e => {
 
       const mousePos = {
         x: e.clientX - canvas.offsetLeft,
         y: e.clientY - canvas.offsetTop
       };
-
-      this.organizers.get(this.type).add(mousePos.x, mousePos.y);
-
-      const pixelColor = clickContext.getImageData(mousePos.x, mousePos.y, 1, 1).data;
-      const color = `rgb(${pixelColor[0]},${pixelColor[1]},${pixelColor[2]})`;
-      if (this.clickables.get(color)) {
-        console.log("clicked on a clickable!");
+      if (this.type === null) {
+        const pixelColor = clickContext.getImageData(mousePos.x, mousePos.y, 1, 1).data;
+        const color = `rgb(${pixelColor[0]},${pixelColor[1]},${pixelColor[2]})`;
+        if (this.clickables.get(color)) {
+          console.log("clicked on a clickable!");
+        }
+      } else {
+        this.organizers.get(this.type).add(mousePos.x, mousePos.y);
       }
+
     });
   }
 }
