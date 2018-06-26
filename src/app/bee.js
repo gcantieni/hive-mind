@@ -22,10 +22,9 @@ import { Clickable } from './clickable.js';
 // }
 
 export class Bee extends Clickable {
-  constructor(x, y, width = constants.BEE_WIDTH, height = constants.BEE_HEIGHT, clickablesMap) {
-    super(x, y, width, height, clickablesMap);
+  constructor(x, y, clickablesMap) {
+    super(x, y, constants.BEE_WIDTH, constants.BEE_WIDTH, constants.BEE_COLOR, clickablesMap);
   }
-
   setPos(x, y) {
     this.x = x;
     this.y = y;

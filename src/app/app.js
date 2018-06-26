@@ -29,7 +29,8 @@ function main() {
   ]);
 
   organizers.get('flower').add(20, 20);
-  organizers.get('flower').draw(context, clickContext);
+  // organizers.get('flower').draw(context, clickContext);
+  // organizer.get('hive')
 
   let menu = new Menu();
 
@@ -43,8 +44,8 @@ function main() {
   function update(time = 0) {
     let progress = time - start;
     if (!start) start = time;
-    // draw(context, organizers, menu);
-    organizers.get('flower').draw(context, clickContext);
+    draw(context, clickContext, organizers, menu);
+    // organizers.get('flower').draw(context, clickContext);
     window.requestAnimationFrame(update)
   }
 }
