@@ -4,5 +4,6 @@ export class Organizer {
   }
 
   add(x, y) {
+    
   }
 }

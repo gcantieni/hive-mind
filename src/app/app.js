@@ -10,14 +10,31 @@ function main() {
   const canvas = document.getElementById('board');
   canvas.width = constants.BOARD_WIDTH;
   canvas.height = constants.BOARD_HEIGHT;
-  const context = board.getContext('2d');
+  const context = canvas.getContext('2d');
 
-  //TODO make off-screen clickCanvas for logical click detection
-  // const clickCanvas =
+  const clickCanvas = document.createElement('canvas');
+  clickCanvas.width = constants.BOARD_WIDTH;
+  clickCanvas.height = constants.BOARD_HEIGHT;
+  const clickContext = clickCanvas.getContext('2d');
+
+  let clickables = new Map();
+
+  canvas.addEventListener('click', e => {
+    const mousePos = {
+      x: e.clientX - canvas.offsetLeft,
+      y: e.clientY - canvas.offsetTop
+    };
+    const pixelColor = clickContext.getImageData(mousePos.x, mousePos.y, 1, 1).data;
+    const color = `rgb(${pixelColor[0]},${pixelColor[1]},${pixelColor[2]})`;
+    if (clickables.get(color)) {
+      console.log("clicked on a clickable!");
+    }
+  })
+
 
   let organizers = new Map([
     ['hive', new HiveOrganizer()],
-    ['flower', new FlowerOrganizer()],
+    ['flower', new FlowerOrganizer(clickables)],
     ['bee', new BeeOrganizer()]
   ]);
 
@@ -26,6 +43,7 @@ function main() {
   let listener = new Listener(menu, organizers);
   listener.setType('flower');
   listener.listen(canvas);
+  organizers.get('flower').add(20, 20);
 
   let start = null;
   update(0);
@@ -33,7 +51,8 @@ function main() {
   function update(time = 0) {
     let progress = time - start;
     if (!start) start = time;
-    draw(context, organizers, menu);
+    // draw(context, organizers, menu);
+    organizers.get('flower').draw(context, clickContext);
     window.requestAnimationFrame(update)
   }
 }

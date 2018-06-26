@@ -20,7 +20,6 @@ function drawCanvas(context) {
 //     context.drawImage(image, x, y);
 //   });
 // }
-
 export function loadImage(url) {
   return new Promise(resolve => {
     const image = new Image();

@@ -1,41 +1,50 @@
 import * as constants from './constants.js';
 import { Organizer } from './organizer.js';
+import { Clickable } from './clickable.js';
 
-export class FlowerOrganizer extends Organizer {
-  constructor() {
-    super();
+export class FlowerOrganizer {
+  constructor(clickablesMap) {
+    this.clickables = clickablesMap;
     this.elements = [];
     this.width = constants.FLOWER_WIDTH;
   }
 
-  draw(context) {
+  draw(context, clickableContext) {
     context.fillStyle = constants.FLOWER_COLOR;
     this.elements.map((flower) => {
       // this.context.fillStyle = flower.color;
-      context.fillRect(flower.x - constants.FLOWER_WIDTH / 2,
-        flower.y- constants.FLOWER_WIDTH / 2,
-        constants.FLOWER_WIDTH,
-        constants.FLOWER_WIDTH);
+      flower.draw(context);
+      flower.drawClickable(clickableContext);
     });
   }
 
   add(x, y, color) {
-    let newFlower = new Flower(x, y, color);
+    let newFlower = new Flower(x, y, color, this.clickables);
     this.elements.push(newFlower);
     return newFlower;
   }
 }
 
-export class Flower {
-  constructor(x, y, color) {
+export class Flower extends Clickable {
+  constructor(x, y, color, clickablesMap) {
+    super(clickablesMap);
     this.x = x;
     this.y = y;
     this.width = constants.FLOWER_WIDTH;
+    this.height = constants.FLOWER_WIDTH;
     this.color = color;
+    this.addClickable();
   }
 
   setPos(x, y) {
     this.x = x;
     this.y = y;
+  }
+
+  draw(context) {
+    context.fillRect(this.x - this.width / 2,
+      this.y - this.height / 2,
+      constants.FLOWER_WIDTH,
+      constants.FLOWER_WIDTH);
   }
 }
