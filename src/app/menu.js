@@ -1,11 +1,20 @@
 import * as constants from './constants.js';
 import { loadImage } from './draw.js';
+import { Clickable } from './clickable.js';
 
 export class Menu {
-  constructor() {
+  constructor(clickables) {
     this.buttons = new Map([
-      ['hive', new MenuButton('/img/hive.png', 0, constants.BOARD_HEIGHT - constants.BUTTON_WIDTH)],
-      ['bee', new MenuButton('/img/bee.png', constants.BUTTON_WIDTH + constants.MENU_PADDING, constants.BOARD_HEIGHT - constants.BUTTON_WIDTH)]
+      ['hive', new MenuButton(
+          '/img/hive.png',
+          0,
+          constants.BOARD_HEIGHT - constants.BUTTON_WIDTH,
+          clickables)],
+      ['bee', new MenuButton(
+          '/img/bee.png',
+          constants.BUTTON_WIDTH + constants.MENU_PADDING,
+          constants.BOARD_HEIGHT - constants.BUTTON_WIDTH,
+          clickables)]
     ]);
   }
   // draw(context) {
@@ -20,28 +29,23 @@ export class Menu {
           values.map((button, i) => button.img = images[i]);
         });
   }
-  draw(context) {
-    this.buttons.forEach(button => button.draw(context));
+  draw(context, clickContext) {
+    this.buttons.forEach(button => button.draw(context, clickContext));
   }
 }
 
 
 
-class MenuButton {
-  constructor(url, x = 0,y = 0,
-    width = constants.BUTTON_WIDTH,
-    height = constants.BUTTON_WIDTH) {
-
+class MenuButton extends Clickable {
+  constructor(url, x, y, clickablesMap) {
+    super(x, y, constants.BUTTON_WIDTH, constants.BUTTON_WIDTH, null, clickablesMap);
     this.url = url;
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
     this.img = null;
   }
-  draw(context) {
+  draw(context, clickContext) {
     if (this.img) {
       context.drawImage(this.img, this.x, this.y, this.width, this.height);
+      super.drawClickable(clickContext);
     } else {
       console.log("error: image not set");
     }

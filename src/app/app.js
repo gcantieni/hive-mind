@@ -17,6 +17,7 @@ function main() {
   clickCanvas.width = constants.BOARD_WIDTH;
   clickCanvas.height = constants.BOARD_HEIGHT;
   const clickContext = clickCanvas.getContext('2d');
+  console.log(clickContext);
 
   let clickables = new Map();
   // let hiveOrganizer = new Organizer('hive', clickables);
@@ -32,11 +33,13 @@ function main() {
   // organizers.get('flower').draw(context, clickContext);
   // organizer.get('hive')
 
-  let menu = new Menu();
+  let menu = new Menu(clickables);
 
   let listener = new Listener(menu, organizers, clickables);
   listener.listen(canvas, clickContext);
   organizers.get('flower').add(20, 20);
+  organizers.get('hive').add(300, 200);
+  organizers.get('bee').add(400, 300);
 
   let start = null;
   update(0);

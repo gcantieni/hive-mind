@@ -5,7 +5,7 @@ export function draw(context, clickContext, organizers, menu) {
   menu.load().then(resolve => {
     drawCanvas(context);
     organizers.forEach(organizer => organizer.draw(context, clickContext));
-    menu.draw(context);
+    menu.draw(context, clickContext);
   });
 }
 

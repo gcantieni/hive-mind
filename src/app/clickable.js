@@ -13,15 +13,18 @@ export class Clickable {
     this.color = color;
     this.addClickable();
   }
-  draw(context, clickableContext) {
+  draw(context, clickContext) {
     context.fillStyle = this.color;
     context.fillRect(
-      this.x - this.width / 2,
-      this.y - this.height / 2,
+      this.x,
+      this.y,
       this.width,
       this.height);
-    clickableContext.fillStyle = this.clickColor;
-    clickableContext.fillRect(this.x - this.width / 2, this.y - this.width / 2, this.width, this.height);
+    this.drawClickable(clickContext);
+  }
+  drawClickable(clickContext) {
+    clickContext.fillStyle = this.clickColor;
+    clickContext.fillRect(this.x, this.y, this.width, this.height);
   }
   addClickable() {
     while(true) {
