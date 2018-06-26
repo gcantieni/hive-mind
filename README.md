@@ -33,6 +33,9 @@ mini-map representation.
 bee colonies.
 * Control the beehive's temperature using workers to fan the hive
 * Get all bees in a cluster for the winter, then see which hives survive
+* Use an algorithm like [this one](https://en.wikipedia.org/wiki/Bees_algorithm)
+for bees to find the appropriate flower stores. This would imply that the player
+should recruit certain bees as scouts.
 
 ### Nitty-gritty checklist
 * ~~Menu of possible objects to place~~

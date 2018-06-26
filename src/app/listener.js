@@ -21,9 +21,12 @@ export class Listener {
   changeMode() {
     if (this.addMode) {
       this.addMode = false;
+      // TODO replace with something more elegent
+      this.type === null;
     } else {
       this.addMode = true;
     }
+    console.log(`add mode is now ${this.addMode ? "on" : "off"}`)
   }
 
   listen(canvas, clickContext) {

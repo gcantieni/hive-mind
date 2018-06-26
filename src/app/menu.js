@@ -57,7 +57,10 @@ class MenuButton extends Clickable {
     return loadImage(this.url);
   }
   handleClick(listener) {
+    const oldType = listener.type;
+    if (oldType === this.type || oldType == null) {
+      listener.changeMode();
+    }
     listener.setType(this.type);
-    listener.changeMode();
   }
 }
