@@ -7,7 +7,7 @@ satisfaction.
 
 ### To run
 After cloning, either run `index.html` in a browser without stringent
-security requirements (e.g. my version of Firefox), or install npm and run
+security requirements (e.g. Firefox), or install npm and run
 `npm run start` and enter the specified localhost in your browser's search
 bar.
 
@@ -23,15 +23,21 @@ of survival
 
 ### Ideas for future development:
 * Create ants, bears, mice, and other invaders
-* Create a broader map and universe to explore
+* Create a broader map and universe to explore along with a
+mini-map representation.
 * Include flowers that need to be tended and harvested for honey
 * Reward the player for helping the flowers and have the flowers reproduce
 * Manage resources and create a huge bee colony
 * Add obstacles later in the game, such as pesticides
 * Add elements that raise awareness of the modern issues that keep killing off
 bee colonies.
+* Control the beehive's temperature using workers to fan the hive
+* Get all bees in a cluster for the winter, then see which hives survive
 
-### Nitty-gritty ideas
-* Menu of possible objects to place
+### Nitty-gritty checklist
+* ~~Menu of possible objects to place~~
 * A sign of which object you've chosen and a translucent version that hovers
-around the mouse 
+around the mouse
+* A starting (randomly generated?) map of flowers read from a
+JSON file.
+* A resources bar on the menu that measures honey/pollen/water/resin supply
