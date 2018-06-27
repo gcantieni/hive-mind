@@ -58,7 +58,7 @@ class MenuButton extends Clickable {
   }
   handleClick(listener) {
     const oldType = listener.type;
-    if (oldType === this.type || oldType == null) {
+    if (listener.addMode === false || oldType === this.type || oldType == null) {
       listener.changeMode();
     }
     listener.setType(this.type);
