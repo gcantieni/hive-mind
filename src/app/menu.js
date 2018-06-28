@@ -18,6 +18,21 @@ export class Menu {
           constants.BOARD_HEIGHT - constants.BUTTON_WIDTH,
           clickables)]
     ]);
+    this.resources = {
+      nectar : {
+        name: 'Nectar',
+        value: 0
+      },
+      honey : {
+        name: 'Honey',
+        value: 0
+      },
+      pollen: {
+        name: 'Pollen',
+        value: 0
+      }
+    };
+    this.resources.honey.value += 1;
   }
   // draw(context) {
   //   loadImage(this.url).then(image => {
@@ -33,10 +48,30 @@ export class Menu {
   }
   draw(context, clickContext) {
     this.buttons.forEach(button => button.draw(context, clickContext));
+    drawResources(context, this.resources);
+    // context.textBaseline = 'top';
+    // context.font = 'bold 14px Courier';
+    // context.fillText(`${this.resources.honey.name}: ${this.resources.honey.value}`, 607 , 425);
+    // context.fillText(`Nectar: ${this.resources.nectar}`, 600 , 450);
+    // context.fillText(`Pollen: ${this.resources.pollen}`, 600 , 475);
   }
 }
 
+function drawResources(context, resources) {
+  let res;
+  let names = Object.getOwnPropertyNames(resources);
+  let numEntries = names.length;
+  let y = constants.BOARD_HEIGHT - numEntries * constants.RESOURCE_SPACING;
 
+  context.textBaseline = 'top';
+  context.fillStyle = '#000';
+  context.font = 'bold 14px Courier';
+
+  names.forEach(name => {
+    context.fillText(`${resources[name].name}: ${resources[name].value}`, 600, y);
+    y += constants.RESOURCE_SPACING;
+  });
+}
 
 class MenuButton extends Clickable {
   constructor(type, url, x, y, clickablesMap) {

@@ -16,4 +16,6 @@ export const BUTTON_WIDTH = 60;
 
 export const MENU_PADDING = 6;
 
+export const RESOURCE_SPACING = 25;
+
 export const VELOCITY = 6;

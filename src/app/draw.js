@@ -6,6 +6,8 @@ export function draw(context, clickContext, organizers, menu) {
     drawCanvas(context);
     organizers.forEach(organizer => organizer.draw(context, clickContext));
     menu.draw(context, clickContext);
+    // let txt = "Hello, World!";
+
   });
 }
 
