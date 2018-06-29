@@ -9,9 +9,9 @@ export const FLOWER_COLOR = '#b2157e';
 export const BACKGROUND_COLOR = '#A1FFD9';
 export const MENU_BAR_COLOr = '#000000';
 
-export const HIVE_WIDTH = 80;
+export const HIVE_WIDTH = 100;
 export const FLOWER_WIDTH = 20;
-export const BEE_WIDTH = 5;
+export const BEE_WIDTH = 20;
 export const BUTTON_WIDTH = 60;
 
 export const MENU_PADDING = 6;

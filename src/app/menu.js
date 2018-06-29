@@ -32,7 +32,6 @@ export class Menu {
         value: 0
       }
     };
-    this.resources.honey.value += 1;
   }
   // draw(context) {
   //   loadImage(this.url).then(image => {
@@ -44,6 +43,7 @@ export class Menu {
       values.map(button => button.load()))
         .then(images => {
           values.map((button, i) => button.img = images[i]);
+          return images;
         });
   }
   draw(context, clickContext) {

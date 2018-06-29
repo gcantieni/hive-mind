@@ -1,14 +1,10 @@
 import * as constants from './constants.js';
 
 export function draw(context, clickContext, organizers, menu) {
-  // load menu first so it appears on top
+  drawCanvas(context);
+  organizers.forEach(organizer => organizer.draw(context, clickContext));
+  menu.draw(context, clickContext);
 
-  menu.load().then(resolve => {
-    drawCanvas(context);
-    organizers.forEach(organizer => organizer.draw(context, clickContext));
-    menu.draw(context, clickContext);
-
-  });
 }
 
 function drawCanvas(context) {
@@ -18,9 +14,6 @@ function drawCanvas(context) {
 export function loadImage(url) {
   return new Promise(resolve => {
     const image = new Image();
-    // image.addEventListener('load', () => {
-    //   resolve(image);
-    // });
     image.onload = () => {
       resolve(image);
     }

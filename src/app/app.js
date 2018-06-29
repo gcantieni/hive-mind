@@ -5,7 +5,7 @@ import { Listener } from './listener.js';
 import { Menu } from './menu.js';
 import { ClickableSprite } from './clickable-sprite.js';
 
-function main() {
+async function main() {
   const canvas = document.getElementById('board');
   canvas.width = constants.BOARD_WIDTH;
   canvas.height = constants.BOARD_HEIGHT;
@@ -25,6 +25,7 @@ function main() {
   ]);
 
   let menu = new Menu(clickables);
+  let menuImages = await menu.load();
 
   let listener = new Listener(menu, organizers, clickables);
   listener.listen(canvas, clickContext);
