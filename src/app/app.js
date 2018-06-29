@@ -38,6 +38,7 @@ async function main() {
     let progress = time - start;
     if (!start) start = time;
     draw(context, clickContext, organizers, menu);
+    organizers.get('bee').elements.forEach(bee => bee.update());
     window.requestAnimationFrame(update)
   }
 }

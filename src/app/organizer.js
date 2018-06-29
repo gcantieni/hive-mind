@@ -31,12 +31,9 @@ export class Organizer {
         break;
       case 'bee':
         this.elements.push(
-          new ClickableSprite(
-            '/img/bee-sprite.png',
+          new Bee(
             x - constants.BEE_WIDTH / 2,
             y - constants.BEE_WIDTH / 2,
-            constants.BEE_WIDTH,
-            constants.BEE_WIDTH,
             this.clickables));
         break;
       default:

@@ -36,6 +36,7 @@ bee colonies.
 * Use an algorithm like [this one](https://en.wikipedia.org/wiki/Bees_algorithm)
 for bees to find the appropriate flower stores. This would imply that the player
 should recruit certain bees as scouts.
+* Implement a 'hive view' to micro manage specific hive functions
 
 ### Nitty-gritty checklist
 * ~~Menu of possible objects to place~~
@@ -43,4 +44,6 @@ should recruit certain bees as scouts.
 around the mouse
 * A starting (randomly generated?) map of flowers read from a
 JSON file.
-* A resources bar on the menu that measures honey/pollen/water/resin supply
+* ~~A resources bar on the menu that measures honey/pollen/water/resin supply~~
+* The ability to move a bee towards a destination
+* A cost to each recruit/item
