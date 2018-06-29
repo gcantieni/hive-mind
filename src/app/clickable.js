@@ -41,7 +41,7 @@ export class Clickable {
     }
   }
   handleClick(type) {
-    console.log(`clicked on ${this}`);
+    console.log(`clicked on a clickable game piece`);
   }
 
   getRandomColor() {

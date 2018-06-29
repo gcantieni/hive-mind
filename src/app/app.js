@@ -3,6 +3,7 @@ import { Organizer } from './organizer.js';
 import { draw } from './draw.js';
 import { Listener } from './listener.js';
 import { Menu } from './menu.js';
+import { ClickableSprite } from './clickable-sprite.js';
 
 function main() {
   const canvas = document.getElementById('board');
@@ -30,6 +31,7 @@ function main() {
 
   let start = null;
   update(0);
+
 
   function update(time = 0) {
     let progress = time - start;
