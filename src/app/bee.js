@@ -11,13 +11,20 @@ export class Bee extends ClickableSprite {
       constants.BEE_WIDTH,
       constants.BEE_WIDTH,
       clickablesMap);
-    this.target = new Vec(0, 0);
+
+    this.target = null;
+    this.type = 'bee';
   }
   setPos(x, y) {
     this.x = x;
     this.y = y;
   }
+  handleClick(listener) {
+    listener.selectedBees.push(this);
+  }
   update() {
+    if (!this.target) return;
+
     let toTarget = new Vec(
       this.target.x - this.x,
       this.target.y - this.y

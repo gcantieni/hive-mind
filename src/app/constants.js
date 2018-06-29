@@ -18,4 +18,4 @@ export const MENU_PADDING = 6;
 
 export const RESOURCE_SPACING = 25;
 
-export const BEE_SPEED = 5;
+export const BEE_SPEED = 1;

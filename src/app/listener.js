@@ -1,32 +1,34 @@
 import * as constants from './constants.js';
+import { Vec } from './math.js';
 
 export class Listener {
   constructor(menu, organizers, clickables) {
     this.menu = menu;
     this.organizers = organizers;
     this.clickables = clickables;
-    this.addMode = false;
+    this.inAddMode = false;
 
-    this.type = null;
+    this.addType = null;
+    this.selectedBees = [];
   }
 
   setType(newType) {
     if (this.organizers[newType] === null) {
       throw "Non-recognized type";
     } else {
-      this.type = newType;
+      this.addType = newType;
     }
   }
 
   changeMode() {
-    if (this.addMode) {
-      this.addMode = false;
+    if (this.inAddMode) {
+      this.inAddMode = false;
       // TODO replace with something more elegent
-      this.type === null;
+      this.addType === null;
     } else {
-      this.addMode = true;
+      this.inAddMode = true;
     }
-    console.log(`add mode is now ${this.addMode ? "on" : "off"}`)
+    console.log(`add mode is now ${this.inAddMode ? "on" : "off"}`)
   }
 
   listen(canvas, clickContext) {
@@ -40,10 +42,16 @@ export class Listener {
       const pixelColor = clickContext.getImageData(mousePos.x, mousePos.y, 1, 1).data;
       const color = `rgb(${pixelColor[0]},${pixelColor[1]},${pixelColor[2]})`;
       const clickable = this.clickables.get(color);
+
       if (clickable) {
+        // TODO change this to flower or hive
+        if (clickable.type === 'hive' && this.selectedBees) {
+          this.selectedBees.forEach(bee => bee.target = new Vec(clickable.x, clickable.y));
+          this.selectedBees = [];
+        }
         clickable.handleClick(this);
-      } else if (this.addMode) {
-        this.organizers.get(this.type).add(mousePos.x, mousePos.y);
+      } else if (this.inAddMode) {
+        this.organizers.get(this.addType).add(mousePos.x, mousePos.y);
       }
     });
   }

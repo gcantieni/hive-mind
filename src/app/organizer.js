@@ -25,6 +25,7 @@ export class Organizer {
             constants.HIVE_WIDTH,
             constants.HIVE_WIDTH,
             this.clickables));
+          this.elements[this.elements.length - 1].type = "hive";
         break;
       case 'flower':
         this.elements.push(new Flower(x - constants.FLOWER_WIDTH / 2, y - constants.FLOWER_WIDTH / 2, this.clickables));

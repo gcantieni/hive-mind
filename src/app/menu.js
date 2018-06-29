@@ -33,10 +33,6 @@ export class Menu {
       }
     };
   }
-  // draw(context) {
-  //   loadImage(this.url).then(image => {
-  //     context.drawImage(image, 20, 20);
-  //  });
   load() {
     let values = Array.from(this.buttons.values());
     return Promise.all(
@@ -49,11 +45,6 @@ export class Menu {
   draw(context, clickContext) {
     this.buttons.forEach(button => button.draw(context, clickContext));
     drawResources(context, this.resources);
-    // context.textBaseline = 'top';
-    // context.font = 'bold 14px Courier';
-    // context.fillText(`${this.resources.honey.name}: ${this.resources.honey.value}`, 607 , 425);
-    // context.fillText(`Nectar: ${this.resources.nectar}`, 600 , 450);
-    // context.fillText(`Pollen: ${this.resources.pollen}`, 600 , 475);
   }
 }
 
@@ -92,7 +83,7 @@ class MenuButton extends Clickable {
     return loadImage(this.url);
   }
   handleClick(listener) {
-    const oldType = listener.type;
+    const oldType = listener.addType;
     if (listener.addMode === false || oldType === this.type || oldType == null) {
       listener.changeMode();
     }
