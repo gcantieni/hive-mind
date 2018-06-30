@@ -11,6 +11,7 @@ export class Clickable {
     this.width = width;
     this.height = height;
     this.color = color;
+    this.canBeTarget = false;
     this.addClickable();
   }
   draw(context, clickContext) {

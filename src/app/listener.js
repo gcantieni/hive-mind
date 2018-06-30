@@ -45,8 +45,8 @@ export class Listener {
 
       if (clickable) {
         // TODO change this to flower or hive
-        if (clickable.type === 'hive' && this.selectedBees) {
-          this.selectedBees.forEach(bee => bee.target = new Vec(clickable.x, clickable.y));
+        if (clickable.canBeTarget && this.selectedBees) {
+          this.selectedBees.forEach(bee => bee.target = clickable.center); 
           this.selectedBees = [];
         }
         clickable.handleClick(this);

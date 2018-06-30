@@ -18,14 +18,10 @@ export class Organizer {
     switch (this.type) {
       case 'hive':
         this.elements.push(
-          new ClickableSprite(
-            '/img/hive-sprite.png',
+          new Hive(
             x - constants.HIVE_WIDTH / 2,
             y - constants.HIVE_WIDTH / 2,
-            constants.HIVE_WIDTH,
-            constants.HIVE_WIDTH,
             this.clickables));
-          this.elements[this.elements.length - 1].type = "hive";
         break;
       case 'flower':
         this.elements.push(new Flower(x - constants.FLOWER_WIDTH / 2, y - constants.FLOWER_WIDTH / 2, this.clickables));
