@@ -1,9 +1,5 @@
-// import { getMousePos } from './draw.js';
 export class Clickable {
   constructor(x, y, width, height, color, clickablesMap) {
-    //TODO check if a click was within the bounds of this element
-    // this.left =
-    // this.context = clickContext;
     this.clickables = clickablesMap;
     this.clickColor = null;
     this.x = x;
