@@ -27,7 +27,7 @@ async function main() {
   let menu = new Menu(clickables);
   let menuImages = await menu.load();
 
-  let listener = new Listener(menu, organizers, clickables);
+  let listener = new Listener(menu.resources, organizers, clickables);
   listener.listen(canvas, clickContext);
 
   let start = null;

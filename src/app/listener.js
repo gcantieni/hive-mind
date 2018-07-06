@@ -1,9 +1,11 @@
 import * as constants from './constants.js';
-import { Vec } from './math.js';
+import {
+  Vec
+} from './math.js';
 
 export class Listener {
-  constructor(menu, organizers, clickables) {
-    this.menu = menu;
+  constructor(resources, organizers, clickables) {
+    this.resources = resources;
     this.organizers = organizers;
     this.clickables = clickables;
     this.inAddMode = false;
@@ -33,34 +35,40 @@ export class Listener {
 
   listen(canvas, clickContext) {
     canvas.addEventListener('click', e => {
-
-      const mousePos = {
-        x: e.clientX - canvas.offsetLeft,
-        y: e.clientY - canvas.offsetTop
-      };
-
-      const pixelColor = clickContext.getImageData(mousePos.x, mousePos.y, 1, 1).data;
-      const color = `rgb(${pixelColor[0]},${pixelColor[1]},${pixelColor[2]})`;
-      const clickable = this.clickables.get(color);
-
+      let [clickable, mousePos] = this.getClickable(canvas, clickContext, e);
       if (clickable) {
-        // TODO change this to flower or hive
         if (clickable.canBeTarget && this.selectedBees) {
-          this.selectedBees.forEach(bee => bee.target = clickable.center); 
+          this.selectedBees.forEach(bee => bee.target = clickable.center);
           this.selectedBees = [];
         }
         clickable.handleClick(this);
       } else if (this.inAddMode) {
-        this.organizers.get(this.addType).add(mousePos.x, mousePos.y);
+        let adder = this.organizers.get(this.addType);
+        if (this.resources.canCover(adder.cost)) {
+          adder.add(mousePos.x, mousePos.y);
+          this.resources.subtract(adder.cost);
+        }
       }
     });
   }
-}
 
-export function getMousePos(canvas, evt) {
-  let bound = canvas.getBoundingClientRect();
-  return {
-    x: evt.clientX - bound.left,
-    y: evt.clientY - bound.top
+  getClickable(canvas, clickContext, event) {
+    const mousePos = {
+      x: event.clientX - canvas.offsetLeft,
+      y: event.clientY - canvas.offsetTop
+    };
+
+    const pixelColor = clickContext.getImageData(mousePos.x, mousePos.y, 1, 1).data;
+    const color = `rgb(${pixelColor[0]},${pixelColor[1]},${pixelColor[2]})`;
+    const clickable = this.clickables.get(color);
+    return [clickable, mousePos];
   }
 }
+
+// export function getMousePos(canvas, evt) {
+//   let bound = canvas.getBoundingClientRect();
+//   return {
+//     x: evt.clientX - bound.left,
+//     y: evt.clientY - bound.top
+//   }
+// }

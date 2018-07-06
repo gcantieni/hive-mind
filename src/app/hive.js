@@ -12,6 +12,7 @@ export class Hive extends ClickableSprite {
       clickableMap);
 
     this.canBeTarget = true;
+    this.cost = constants.HIVE_COST;
 
     this.center = new Vec(
       this.x + constants.HIVE_WIDTH / 2 - 13,

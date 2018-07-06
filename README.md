@@ -40,10 +40,12 @@ should recruit certain bees as scouts.
 
 ### Nitty-gritty checklist
 * ~~Menu of possible objects to place~~
-* A sign of which object you've chosen and a translucent version that hovers
-around the mouse
+* ~~A resources bar on the menu that measures honey/pollen/water/resin supply~~
+* ~~The ability to move a bee towards a destination~~
+* A cost to each recruit/item
 * A starting (randomly generated?) map of flowers read from a
 JSON file.
-* ~~A resources bar on the menu that measures honey/pollen/water/resin supply~~
-* The ability to move a bee towards a destination
-* A cost to each recruit/item
+* Added functionality for bees and the ability to sync with their hive
+e.g. bees.goHome should send the hive where they were created
+* A sign of which object you've chosen and a translucent version that hovers
+around the mouse

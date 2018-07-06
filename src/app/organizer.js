@@ -12,6 +12,16 @@ export class Organizer {
       throw `Error, ${type} organizers are not supported`;
     }
     this.type = type;
+    switch (this.type) {
+      case 'hive':
+        this.cost = constants.HIVE_COST;
+        break;
+      case 'bee':
+        this.cost = constants.BEE_COST;
+        break;
+      default:
+        this.cost = null;
+    }
   }
 
   add(x, y) {

@@ -14,6 +14,7 @@ export class Bee extends ClickableSprite {
 
     this.target = null;
     this.type = 'bee';
+    this.cost = constants.BEE_COST;
   }
   setPos(x, y) {
     this.x = x;
