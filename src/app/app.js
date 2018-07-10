@@ -1,9 +1,19 @@
 import * as constants from './constants.js';
-import { Organizer } from './organizer.js';
-import { draw } from './draw.js';
-import { Listener } from './listener.js';
-import { Menu } from './menu.js';
-import { ClickableSprite } from './clickable-sprite.js';
+import {
+  Organizer
+} from './organizer.js';
+import {
+  draw
+} from './draw.js';
+import {
+  Listener
+} from './listener.js';
+import {
+  Menu
+} from './menu.js';
+import {
+  ClickableSprite
+} from './clickable-sprite.js';
 
 async function main() {
   const canvas = document.getElementById('board');
@@ -24,11 +34,20 @@ async function main() {
     ['bee', new Organizer('bee', clickables)]
   ]);
 
-  let menu = new Menu(clickables);
-  let menuImages = await menu.load();
+  const menu = new Menu(clickables);
+  const menuImages = await menu.load();
 
   let listener = new Listener(menu.resources, organizers, clickables);
   listener.listen(canvas, clickContext);
+
+  const loadMap = await fetch('/app/map.json');
+  const map = await loadMap.json();
+
+  for (let piece of map.pieces) {
+    for (let i = 0; i < piece.positions.length; i += 2) {
+      organizers.get(piece.type).add(piece.positions[i], piece.positions[i + 1]);
+    }
+  }
 
   let start = null;
   update(0);
@@ -44,6 +63,3 @@ async function main() {
 }
 
 main();
-
-
-

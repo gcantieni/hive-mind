@@ -40,7 +40,6 @@ export class Clickable {
   handleClick(type) {
     console.log(`clicked on a clickable game piece`);
   }
-
   getRandomColor() {
    const r = Math.round(Math.random() * 255);
    const g = Math.round(Math.random() * 255);
