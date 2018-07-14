@@ -16,10 +16,11 @@ export const BEE_WIDTH = 20;
 export const BUTTON_WIDTH = 60;
 
 export const BEE_COST = new ResourceList(0, 10);
-export const HIVE_COST = new ResourceList(0, 0, 0, 1000); 
+export const HIVE_COST = new ResourceList(0, 0, 0, 1000);
 
 export const MENU_PADDING = 6;
 
 export const RESOURCE_SPACING = 25;
+export const RESOURCE_X = 580;
 
 export const BEE_SPEED = 1;

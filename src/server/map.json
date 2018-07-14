@@ -1,0 +1,11 @@
+{
+  "pieces": [
+    {
+      "type": "flower",
+      "positions": [
+        30, 30,
+        50, 50
+      ]
+    }
+  ]
+}

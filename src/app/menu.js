@@ -47,7 +47,7 @@ function drawResources(context, resourceList) {
   context.font = 'bold 14px Courier';
 
   resourceList.values.forEach((value, key) => {
-    context.fillText(`${key}: ${value}`, 600, y);
+    context.fillText(`${key}: ${value}`, constants.RESOURCE_X, y);
     y += constants.RESOURCE_SPACING;
   });
 }
