@@ -1,3 +1,4 @@
+import {Vec} from './math.js';
 export class Clickable {
   constructor(x, y, width, height, color, clickablesMap) {
     this.clickables = clickablesMap;
@@ -8,6 +9,7 @@ export class Clickable {
     this.height = height;
     this.color = color;
     this.canBeTarget = false;
+    this.center = this.center = new Vec(x, y);
     this.addClickable();
   }
   draw(context, clickContext) {

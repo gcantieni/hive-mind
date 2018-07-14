@@ -22,7 +22,7 @@ export class Menu {
         constants.BOARD_HEIGHT - constants.BUTTON_WIDTH,
         clickables)]
     ]);
-    this.resources = new ResourceList(5000, 5000, 5000, 5000);
+    this.resources = new ResourceList(0, 50, 500, 1000);
   }
   load() {
     let values = Array.from(this.buttons.values());
