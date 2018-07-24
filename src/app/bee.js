@@ -23,6 +23,11 @@ export class Bee extends ClickableSprite {
   handleClick(listener) {
     listener.selectedBees.push(this);
   }
+  harvestHoney(flower) {
+    /*
+      TODO: go between home hive and 
+    */
+  }
   update() {
     if (!this.target) return;
 
