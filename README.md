@@ -82,8 +82,8 @@ should recruit certain bees as scouts.
 * [x] Menu of possible objects to place
 * [x] A resources bar on the menu that measures honey/pollen/water/resin supply
 * [x] The ability to move a bee towards a destination
-* [x]A cost to each recruit/item
-* [x]A starting (randomly generated?) map of flowers read from a
+* [x] A cost to each recruit/item
+* [x] A starting (randomly generated?) map of flowers read from a
 JSON file.
 * Added functionality for bees and the ability to sync with their hive
 e.g. `bees.goHome` should send the hive where they were created
