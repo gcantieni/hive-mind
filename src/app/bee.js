@@ -3,6 +3,7 @@ import { Clickable } from './clickable.js';
 import { ClickableSprite } from './clickable-sprite.js';
 import { Vec } from './math.js';
 
+
 export class Bee extends ClickableSprite {
   constructor(x, y, clickablesMap) {
     super('/img/bee-sprite.png',
