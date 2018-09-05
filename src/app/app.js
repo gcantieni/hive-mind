@@ -1,7 +1,6 @@
 import { drawWorldImages, loadWorldImages } from './world/world-view.js';
 import { getPos } from './world/world-map.js';
 import { worldData } from './world/world-data.js';
-import { TILE_WIDTH, TILE_HEIGHT } from './world/world-view.js';
 import { curry } from './util/functional.js';
 
 (async function main() {
@@ -25,15 +24,6 @@ import { curry } from './util/functional.js';
   // images.forEach((img, idx, arr) => arr[idx] = img.slice(camera.y, camera.y + BOARD_HEIGHT));
   
   drawWorldImages(images, world.width, context);
-
-
-
-
-  
-  // images.forEach((img, idx) => {
-  //   let pos = getPos(idx, world.width);
-  //   drawImage(img, pos.x * TILE_WIDTH, pos.y * TILE_HEIGHT, context);
-  // });
 
   // let start = null;
   // update(0);

@@ -55,4 +55,10 @@ test("shouldDraw should take index and return whether tile should be drawn", () 
   expect(shouldDraw(cam, { x: 2, y: 2 })).toBe(true);
   expect(shouldDraw(cam, { x: 3, y: 1 })).toBe(false);
   expect(shouldDraw(cam, { x: 1, y: 3 })).toBe(false);
+ 
+  cam = { x: 0.5, y: 0.5, width: 2, height: 2, maxX: 3, maxY: 3 };
+  expect(shouldDraw(cam, { x: 0, y: 0 })).toBe(true);
+  expect(shouldDraw(cam, { x: 1, y: 1 })).toBe(true);
+  expect(shouldDraw(cam, { x: 3, y: 3 })).toBe(false);
+  expect(shouldDraw(cam, { x: 4, y: 0 })).toBe(false);
 });
