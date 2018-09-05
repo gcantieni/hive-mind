@@ -1,4 +1,4 @@
-import { forEach2D, arraysEqual2D, initializeArray2D, copyArray2D, map2D } from './array2D.js';
+import { forEach2D, arraysEqual2D, initializeArray2D, copyArray2D, map2D, make2D } from './array2D.js';
 
 test('forEach2D', () => {
     var sample2D = [
@@ -69,4 +69,8 @@ test('copyArray2D should return a 2-deep array copy', () => {
   sample2D[0][0] = 2;
   expect(sample2D).toEqual(shallowCopy);
   expect(sample2D).not.toEqual(deepCopy);
+});
+
+test('make2D should convert 1 dimentional array to 2 dimentional array', () => {
+  expect(make2D([1, 2, 3, 4], 2)).toEqual([[1, 2], [3, 4]]);
 });

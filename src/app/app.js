@@ -1,12 +1,39 @@
-import { drawWorld } from './world/world-view.js';
-import { map } from './world/map.js';
+import { drawWorldImages, loadWorldImages } from './world/world-view.js';
+import { getPos } from './world/world-map.js';
+import { worldData } from './world/world-data.js';
 import { TILE_WIDTH, TILE_HEIGHT } from './world/world-view.js';
+import { curry } from './util/functional.js';
 
-(function main() {
+(async function main() {
+  const BOARD_WIDTH = 300;
+  const BOARD_HEIGHT = 300;
+
   const canvas = document.getElementById('board');
+  canvas.width = BOARD_WIDTH;
+  canvas.height = BOARD_HEIGHT;
+
   const context = canvas.getContext('2d');
-  var testWorld = map;
-  drawWorld(testWorld.map, testWorld.width, context);
+  var world = worldData;
+  var camera = {
+    x: 0,
+    y: 0
+  };
+
+  var images = await loadWorldImages(world.map);
+  // images = images.slice(camera.x, camera.x + BOARD_WIDTH);
+  // console.log(images);
+  // images.forEach((img, idx, arr) => arr[idx] = img.slice(camera.y, camera.y + BOARD_HEIGHT));
+  
+  drawWorldImages(images, world.width, context);
+
+
+
+
+  
+  // images.forEach((img, idx) => {
+  //   let pos = getPos(idx, world.width);
+  //   drawImage(img, pos.x * TILE_WIDTH, pos.y * TILE_HEIGHT, context);
+  // });
 
   // let start = null;
   // update(0);

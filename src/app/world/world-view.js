@@ -1,5 +1,5 @@
 import { compose, curry, flatten, map, composeAsync } from '../util/functional.js';
-import { getPos } from './world-map.js';
+import { getPos, shouldDraw, idxToCoord } from './world-map.js';
 
 export const TILE_WIDTH = 20;
 export const TILE_HEIGHT = 20;
@@ -13,20 +13,17 @@ export function getUrl(type) {
   }
 }
 
-export async function drawWorld(world, width, context) {
-  var idxToPos = curry(getPos)(width);
-  var world = await loadWorld(world);
-  world.forEach((img, idx) => {
-    let pos = idxToPos(idx);
+export async function drawWorldImages(worldImages, width, context) {
+  worldImages.forEach((img, idx) => {
+    var pos = getPos(width, idx);
     drawImage(img, pos.x * TILE_WIDTH, pos.y * TILE_HEIGHT, context);
   });
 }
 
-export function loadWorld(worldMap) {
+export function loadWorldImages(worldMap) {
   var images = map(compose(loadImage, getUrl), worldMap);
   return Promise.all(images);
 }
-
 export function loadImage(imageUrl) {
   return new Promise(resolve => {
     var image = new Image();
@@ -39,4 +36,12 @@ export function loadImage(imageUrl) {
 
 export function drawImage(img, x, y, context) {
   context.drawImage(img, x, y, TILE_WIDTH, TILE_HEIGHT);
+}
+
+export function drawVisibleWorld(camera, context, world) {
+  var pos = curry(idxToCoord)(world.cols);
+  var shouldDrawIdx = compose(pos, curry(shouldDraw)(camera))
+  var imagesToDraw = world.map
+    .filter((img, idx) => shouldDrawIdx(idx))
+    .forEach((img, idx) =>  drawImage(img, pos(idx).x, pos(idx).y, context));
 }

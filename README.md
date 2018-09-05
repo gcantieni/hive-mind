@@ -53,12 +53,35 @@ Monocultures that slowly spread and destroy flowers...
 * Repel invaders with your stingers
 * Once you have enough hive members, split your hive and spread your population
 
-### Core minimum functionality goals
+### Minimum functionality checklist
 * [ ] Player has resources that are depleted by bee population and is able to use them to make purchases
 * [ ] Player can use the resources they have to gain more resources in the future
 * [ ] The game includes hives, bees, and flowers
 * [ ] Bees can harvest resources from flowers and bring them to the hive
 * [ ] There are obstacles that the player can surmount through using resources and making trade-offs
+
+### Checklist
+world
+* [ ] Represent world as tilemap
+* [ ] There is both a logical representationo and a visual representation
+* [ ] Can represent multiple layers
+* [ ] A starting (randomly generated?) map of flowers read from a JSON file.
+flowers
+* [ ] Flowers exist
+bees
+* [ ] There are bees
+* [ ] Bees can move towards certain well defined items 
+* [ ] Can to move a bee towards a destination
+* [ ] A cost to each recruit/item
+menu
+* [ ] Can see currently available resources
+* Added functionality for bees and the ability to sync with their hive
+e.g. `bees.goHome` should send the hive where they were created
+* [ ] A sign of which object you've chosen and a translucent version that hovers
+around the mouse, and a signifier
+* [ ] Rotate bee sprites so that they are facing in their direction of travel
+* [ ] Implement drag and drop listener (or think of different game mechanic for
+  selecting multiple bees).
 
 ### Ideas for future development:
 * Create ants, bears, mice, and other invaders
@@ -78,17 +101,3 @@ should recruit certain bees as scouts.
 * Implement a 'hive view' to micro manage specific hive functions
 * Have hive menu that's composed of hexagons where you can assign bees to certain activities
 
-### Nitty-gritty checklist
-* [x] Menu of possible objects to place
-* [x] A resources bar on the menu that measures honey/pollen/water/resin supply
-* [x] The ability to move a bee towards a destination
-* [x] A cost to each recruit/item
-* [x] A starting (randomly generated?) map of flowers read from a
-JSON file.
-* Added functionality for bees and the ability to sync with their hive
-e.g. `bees.goHome` should send the hive where they were created
-* A sign of which object you've chosen and a translucent version that hovers
-around the mouse, and a signifier
-* Rotate bee sprites so that they are facing in their direction of travel
-* Implement drag and drop listener (or think of different game mechanic for
-  selecting multiple bees).

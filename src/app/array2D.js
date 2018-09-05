@@ -27,3 +27,11 @@ export function copyArray2D(array) {
   array.forEach((subArray, i) => newArray[i] = subArray.slice());
   return newArray;
 }
+
+export function make2D(arr, cols) {
+  var copy = arr.slice();
+  var res = []; 
+  while (copy.length) 
+    res.push(copy.splice(0, cols));
+  return res; 
+}

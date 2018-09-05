@@ -1,4 +1,4 @@
-export var map = {
+export var worldData = {
   map: [
     "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee",
     "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee",
@@ -12,5 +12,6 @@ export var map = {
     "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee",
     "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee", "bee",
   ],
-  width: 14
+  cols: 14,
+  rows: 11
 };
