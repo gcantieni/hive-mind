@@ -11,7 +11,9 @@ It is coded with vanilla JavaScript, and uses Jest for testing.
 After cloning, either run `index.html` in a browser without stringent
 security requirements (e.g. Firefox), or install npm and run
 `npm run start` and enter the specified localhost in your browser's search
-bar.
+bar. 
+
+This project uses node libraries and the node import syntax, so to run in the browser after making changes you'll have to use a tool like browserify. If you've installed browserify, simply run `npm run build` and you can reload your browser to see the changes. Since this can be cumbersome, I highly recommend a tool like watchify to auromatically rebuild the project whenever you've made an edit. If you've installed watchify, simply run `npm run watch` to start watching your file for changes. 
 
 ### Gameplay
 
