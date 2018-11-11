@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "serve ./src",
-    "test": "jest"
+    "test": "jest",
+    "build": "browserify src/app/app.js -o src/static/bundle.js",
+    "watch": "watchify src/app/app.js -o src/static/bundle.js --debug --verbose"
   },
   "jest": {
     "transform": {
@@ -24,6 +26,8 @@
   "homepage": "https://github.com/gcantieni/hive-mind#readme",
   "dependencies": {
     "babel-preset-env": "^1.7.0",
+    "immutable": "^4.0.0-rc.12",
+    "ramda": "^0.25.0",
     "serve": "^9.1.0"
   },
   "devDependencies": {
