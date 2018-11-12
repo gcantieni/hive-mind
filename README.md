@@ -63,19 +63,18 @@ Monocultures that slowly spread and destroy flowers...
 * [ ] There are obstacles that the player can surmount through using resources and making trade-offs
 
 ### Checklist
-world
-* [ ] Represent world as tilemap
-* [ ] There is both a logical representationo and a visual representation
-* [ ] Can represent multiple layers
-* [ ] A starting (randomly generated?) map of flowers read from a JSON file.
-flowers
+#### world
+* [x] Represent world as tilemap
+* [x] There is both a logical representationo and a visual representation
+* [x] Can represent multiple layers
+#### flowers
 * [ ] Flowers exist
-bees
+#### bees
 * [ ] There are bees
 * [ ] Bees can move towards certain well defined items 
 * [ ] Can to move a bee towards a destination
 * [ ] A cost to each recruit/item
-menu
+#### menu
 * [ ] Can see currently available resources
 * Added functionality for bees and the ability to sync with their hive
 e.g. `bees.goHome` should send the hive where they were created
