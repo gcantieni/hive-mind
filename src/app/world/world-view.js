@@ -1,5 +1,5 @@
-import { compose, curry, flatten, map, composeAsync } from '../util/functional.js';
-import { getPos, shouldDraw, idxToCoord } from './world-map.js';
+import { compose, curry, map } from '../util/functional.js';
+import { getPos, shouldDraw, idxToCoord, worldToScreen } from './world-map.js';
 
 export const TILE_WIDTH = 20;
 export const TILE_HEIGHT = 20;
@@ -13,7 +13,7 @@ export function getUrl(type) {
   }
 }
 
-export async function drawWorldImages(worldImages, width, context) {
+export function drawWorldImages(worldImages, width, context) {
   worldImages.forEach((img, idx) => {
     var pos = getPos(width, idx);
     drawImage(img, pos.x * TILE_WIDTH, pos.y * TILE_HEIGHT, context);

@@ -6,8 +6,8 @@
   "scripts": {
     "start": "serve ./src",
     "test": "jest",
-    "build": "browserify src/app/app.js -o src/static/bundle.js",
-    "watch": "watchify src/app/app.js -o src/static/bundle.js --debug --verbose"
+    "build": "browserify src/app/main.js -o src/static/bundle.js",
+    "watch": "watchify src/app/main.js -o src/static/bundle.js --debug --verbose"
   },
   "jest": {
     "transform": {

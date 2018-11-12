@@ -37,15 +37,18 @@ const R = require('ramda');
 		maxY: 90
 	}
 	var tileAtlas = new Map()
-	tileAtlas.set(0, 'green')
-	tileAtlas.set(1, 'purple')
-	tileAtlas.set(2, 'blue')
+	tileAtlas.set(0, 'GreenYellow')
+	tileAtlas.set(1, 'Yellow')
+	tileAtlas.set(2, 'Orchid')
 
 
 	var getTileIndex = (row, col, cols) => row*cols + col
 	// val is not used but needed for 
 	var getRowCol = (cols, val, idx) => {
-		return { row: Math.floor(idx / cols), col: idx % cols, val: val} 
+		return { 
+			row: Math.floor(idx / cols), 
+			col: idx % cols, val: val
+		} 
 	}
 	getRowCol = R.curry(getRowCol)(worldMap.cols)
 
@@ -61,25 +64,43 @@ const R = require('ramda');
 	var filterVisible = R.compose(
 		R.filter(
 			R.where({
-				row: R.both(R.gt(R.__, rowRange.start - 1), R.lt(R.__, rowRange.end)),
-				col: R.both(R.gt(R.__, colRange.start - 1), R.lt(R.__, colRange.end))
+				row: R.both(
+					R.gt(R.__, rowRange.start - 1), 
+					R.lt(R.__, rowRange.end)),
+				col: R.both(
+					R.gt(R.__, colRange.start - 1), 
+					R.lt(R.__, colRange.end))
 			})),
 		R.addIndex(R.map)(getRowCol))
 
-	var offset= R.curry((tsize, camPos) => -camPos + Math.floor(camPos / tsize) * tsize)(TILE_SIZE)
-	var rowColValToXYVal = R.curry((tsize, cam, rowColVal) => {
+	var offset = R.curry(
+		(tsize, rangeStart, camPos) => 
+			-camPos + rangeStart * tsize)(TILE_SIZE)
+
+	var offsets = {
+		x: offset(colRange.start, camera.x),
+		y: offset(rowRange.start, camera.y)
+	}
+
+	var rowColValToXYVal = R.curry((tsize, cam, startRow, startCol, rowColVal) => {
 		return {
-			x: rowColVal.col * tsize + offset(cam.x), 
-			y: rowColVal.row * tsize + offset(cam.y), 
+			x: (rowColVal.col - startCol) * tsize 
+				+ offset(startCol, cam.x), 
+			y: (rowColVal.row - startRow) * tsize 
+				+ offset(startRow, cam.y), 
 			val: rowColVal.val
 		}
-	})(TILE_SIZE, camera) 
+	})(TILE_SIZE, camera, rowRange.start, colRange.start) 
+
+
 	var renderImage = R.curry((tsize, ctx, tatlas, XYVal) => {
 		ctx.fillStyle = tatlas.get(XYVal.val)
 		ctx.fillRect(XYVal.x, XYVal.y, tsize, tsize) 
 	})(TILE_SIZE, context, tileAtlas)
-	renderImage({x: 40, y: 30, val:1})
-	var renderMap = R.compose(R.map(renderImage), R.map(rowColValToXYVal), filterVisible)
+	var renderMap = R.compose(
+		R.map(renderImage), 
+		R.map(rowColValToXYVal), 
+		filterVisible)
 
 	renderMap(worldMap.layers)
 })()
