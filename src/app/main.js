@@ -4,7 +4,7 @@ const R = require('ramda');
 (async function main() {
 	const BOARD_WIDTH = 100;
 	const BOARD_HEIGHT = 100;
-	const TILE_SIZE = 10;
+	const TILE_SIZE = 50;
 
 	const canvas = document.getElementById('board');
 	canvas.width = BOARD_WIDTH;
@@ -13,28 +13,21 @@ const R = require('ramda');
 	const context = canvas.getContext('2d');
 
 	var worldMap = {
-		rows: 10, 
-		cols: 10,
+		rows: 3, 
+		cols: 3,
 		layers:	[
-			0, 1, 1, 0, 1, 1, 0, 1, 1, 0,
-			0, 2, 1, 0, 2, 1, 0, 2, 1, 0,
-			0, 1, 2, 0, 1, 2, 0, 1, 2, 0,
-			0, 2, 1, 0, 2, 1, 0, 2, 1, 0,
-			0, 1, 1, 0, 1, 1, 0, 1, 1, 0,
-			0, 2, 2, 0, 2, 2, 0, 2, 2, 0,
-			0, 1, 1, 0, 1, 1, 0, 1, 1, 0,
-			0, 2, 1, 0, 2, 1, 0, 2, 1, 0,
-			0, 1, 2, 0, 1, 2, 0, 1, 2, 0,
-			0, 2, 2, 0, 2, 2, 0, 2, 2, 0,
+			1, 1, 1, 
+			0, 2, 1,
+			0, 1, 2
 		]
 	}
 	var camera = {
-		x: 0,
-		y: 0,
-		width: 50,
-		height: 50,
-		maxX: 90,
-		maxY: 90
+		x: 25,
+		y: 25,
+		width: 100,
+		height: 100,
+		maxX: 50,
+		maxY: 50
 	}
 	var tileAtlas = new Map()
 	tileAtlas.set(0, 'GreenYellow')
@@ -55,7 +48,7 @@ const R = require('ramda');
 	var visibleRange = (camStart, camSize, tsize) => {
 		return { 
 			start: Math.floor(camStart / tsize),
-			end: Math.floor(camStart / tsize) + camSize / tsize
+			end: Math.ceil(camStart / tsize) + camSize / tsize
 		}
 	}
 
@@ -72,6 +65,8 @@ const R = require('ramda');
 					R.lt(R.__, colRange.end))
 			})),
 		R.addIndex(R.map)(getRowCol))
+
+	console.log(filterVisible(worldMap.layers))
 
 	var offset = R.curry(
 		(tsize, rangeStart, camPos) => 
