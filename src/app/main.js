@@ -1,17 +1,15 @@
 //const { List, Map, Record } = require('immutable'); 
-const world = require('./world/world-map.js');
+const R = require('ramda')
+const render = require('./world/world-map.js');
 
 (async function main() {
 	const BOARD_WIDTH = 100;
 	const BOARD_HEIGHT = 100;
 	const TILE_SIZE = 50;
-
 	const canvas = document.getElementById('board');
 	canvas.width = BOARD_WIDTH;
 	canvas.height = BOARD_HEIGHT;
-
 	const context = canvas.getContext('2d');
-
 	var worldMap = {
 		rows: 3, 
 		cols: 3,
@@ -29,11 +27,13 @@ const world = require('./world/world-map.js');
 		maxX: 50,
 		maxY: 50
 	}
-
 	var tileAtlas = new Map()
 	tileAtlas.set(0, 'GreenYellow')
 	tileAtlas.set(1, 'Yellow')
 	tileAtlas.set(2, 'Orchid')
 	
-	world(worldMap, camera, tileAtlas, context, TILE_SIZE)
+	//render(worldMap, camera, tileAtlas, context, TILE_SIZE)
+	var camRender = R.curry(render)(worldMap, tileAtlas, context, TILE_SIZE)
+
+	camRender(camera)	
 })()

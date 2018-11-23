@@ -1,6 +1,6 @@
 const R = require('ramda'); 
 
-function renderWorld(worldMap, camera, tileAtlas, context, tsize) {
+function renderWorld(worldMap, tileAtlas, context, tsize, camera) {
 	var colRange = visibleRange(camera.x, camera.width, tsize);
 	var rowRange = visibleRange(camera.y, camera.height, tsize);
 	var getMapRowCol = getRowCol(worldMap.cols) // now just needs idx
