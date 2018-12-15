@@ -1,12 +1,4 @@
-import { 
-    validTile, 
-    idxToCoord,
-    screenToWorld, 
-    worldToScreen, 
-    shouldDraw
-  } from './world-map.js';
-import { forEach2D } from '../array2D.js';
-import { curry } from '../util/functional.js';
+
 
 test('valid tile value should return false if not valid tile', () => {
   expect(validTile('bee')).toBe(true);
