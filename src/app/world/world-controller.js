@@ -1,3 +1,6 @@
+const rxjs = require('rxjs');
+const filter = rxjs.operators.filter;
+const map = rxjs.operators.map;
 
 var changeCamX = (cam, dx) => {
 	if (cam.x + dx > cam.maxX || cam.x + dx < 0) {
@@ -16,7 +19,39 @@ var changeCamY = (cam, dy) => {
 	return cpy
 }
 
-var camera = null
+var camera = null;
+var scrolling = false;
+
+var changeInPos = new Map()
+changeInPos.set('ArrowRight', {x: 1, y: 0});
+changeInPos.set('ArrowLeft',  {x: -1, y: 0});
+changeInPos.set('ArrowUp', {x: 0, y: -1});
+changeInPos.set('ArrowDown', {x: 0, y: 1});
+
+//var changeInPos = new Map({
+//	ArrowRight: {x: 1, y: 0},
+//	ArrowLeft:  {x: -1, y: 0},
+//	ArrowUp: {x: 0, y: -1},
+//	ArrowDown: {x: 0, y: 1}
+//});
+
+
+
+var keyDownObservable = (canvas) => rxjs.Observable.fromEvent(canvas, 'keydown')
+	.pipe(
+		filter(e => changeInPos.has(e.key)),
+		map(e => {
+			e.preventDefault();
+			return changeInPos.get(e.key);
+		}));
+
+var keyUpObservable = (canvas) => rxjs.Observable.fromEvent(canvas, 'keyup')
+	.pipe(
+		filter(e => changeInPos.has(e.key)),
+		map(e => {
+			e.preventDefault();
+			return changeInPos.get(e.key);
+		}));
 
 function addScrollingListener(canvas, initialCamVal, camRenderFunc) {
 	camera = initialCamVal
@@ -45,4 +80,7 @@ function addScrollingListener(canvas, initialCamVal, camRenderFunc) {
 	return canvas
 }
 
-module.exports = addScrollingListener
+module.exports = {
+	keyDownObservable,
+	keyUpObservable
+}
