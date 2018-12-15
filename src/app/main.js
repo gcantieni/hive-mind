@@ -41,7 +41,7 @@ const rxjs = require('rxjs');
 	var camRender = R.curry(render)(worldMap, tileAtlas, context, TILE_SIZE);
 	var keyDown = keyDownObservable(canvas);
 	var keyUp = keyUpObservable(canvas);
-	var speed = 0.01;
+	var speed = 4;
 	var curDir = {x:0, y:0};
 	var addDir = (dir1, dir2) => {
 		return {x: (dir1.x | dir2.x), y: (dir1.y | dir2.y)}
@@ -50,13 +50,15 @@ const rxjs = require('rxjs');
 		return {x: (dir1.x ^ dir2.x), y: (dir1.y ^ dir2.y)}
 	}
 	var isInBounds = (val, max, min) => val < max && val > min; 
-	var updateCam = (cam, changeInPos) => {
+	var updateCam = (cam, changeInPos, speed) => {
 		var cpy = Object.assign({}, cam);
-		if (isInBounds(cam.x + changeInPos.x, cam.maxX, 0)) { 
-			cpy.x += changeInPos.x;
+		var newX = cam.x + (changeInPos.x * speed);
+		var newY = cam.y + (changeInPos.y * speed);
+		if (isInBounds(newX, cam.maxX, 0)) { 
+			cpy.x = newX; 
 		}
-		if (isInBounds(cam.y + changeInPos.y, cam.maxY, 0)) { 
-			cpy.y += changeInPos.y;
+		if (isInBounds(newY, cam.maxY, 0)) { 
+			cpy.y = newY; 
 		}
 		return cpy;
 	}
@@ -71,7 +73,7 @@ const rxjs = require('rxjs');
 	var update = (timestep) => {
 		var progress = timestep - start; 
 		if (!(curDir.x === 0 && curDir.y === 0)) {
-			camera = updateCam(camera, curDir);
+			camera = updateCam(camera, curDir, speed);
 		}
 		camRender(camera);
 		window.requestAnimationFrame(update);
