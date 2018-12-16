@@ -28,15 +28,6 @@ changeInPos.set('ArrowLeft',  {x: -1, y: 0});
 changeInPos.set('ArrowUp', {x: 0, y: -1});
 changeInPos.set('ArrowDown', {x: 0, y: 1});
 
-//var changeInPos = new Map({
-//	ArrowRight: {x: 1, y: 0},
-//	ArrowLeft:  {x: -1, y: 0},
-//	ArrowUp: {x: 0, y: -1},
-//	ArrowDown: {x: 0, y: 1}
-//});
-
-
-
 var keyDownObservable = (canvas) => rxjs.Observable.fromEvent(canvas, 'keydown')
 	.pipe(
 		filter(e => changeInPos.has(e.key)),
@@ -53,34 +44,33 @@ var keyUpObservable = (canvas) => rxjs.Observable.fromEvent(canvas, 'keyup')
 			return changeInPos.get(e.key);
 		}));
 
-function addScrollingListener(canvas, initialCamVal, camRenderFunc) {
-	camera = initialCamVal
-	canvas.addEventListener('keydown', 
-		(keyEvent) => {
-			keyEvent.preventDefault()
-			switch(keyEvent.key) {
-				case "ArrowRight":
-					camera = changeCamX(camera, 5);
-					camRenderFunc(camera);
-					break;
-				case "ArrowLeft":
-					camera = changeCamX(camera, -5);
-					camRenderFunc(camera);
-					break;
-				case "ArrowUp":
-					camera = changeCamY(camera, -5);
-					camRenderFunc(camera);
-					break;
-				case "ArrowDown":
-					camera = changeCamY(camera, 5);
-					camRenderFunc(camera);
-					break;
-			}
-		}, false);
-	return canvas
+// adds together two direction objects
+var addDir = (dir1, dir2) => {
+	return {x: (dir1.x | dir2.x), y: (dir1.y | dir2.y)}
+}
+
+// xors two directions objects 
+var remDir = (dir1, dir2) => {
+	return {x: (dir1.x ^ dir2.x), y: (dir1.y ^ dir2.y)}
+}
+var isInBounds = (val, max, min) => val < max && val > min; 
+var updateCam = (cam, changeInPos, speed) => {
+	var cpy = Object.assign({}, cam);
+	var newX = cam.x + (changeInPos.x * speed);
+	var newY = cam.y + (changeInPos.y * speed);
+	if (isInBounds(newX, cam.maxX, 0)) { 
+		cpy.x = newX; 
+	}
+	if (isInBounds(newY, cam.maxY, 0)) { 
+		cpy.y = newY; 
+	}
+	return cpy;
 }
 
 module.exports = {
 	keyDownObservable,
-	keyUpObservable
+	keyUpObservable,
+	addDir,
+	remDir,
+	updateCam
 }

@@ -2,8 +2,6 @@
 const R = require('ramda');
 const render = require('./world/world-map.js');
 const controller = require('./world/world-controller.js');
-const keyDownObservable = controller.keyDownObservable;
-const keyUpObservable = controller.keyUpObservable;
 const rxmap = require('rxjs/operator/map');
 const rxjs = require('rxjs');
 
@@ -39,41 +37,22 @@ const rxjs = require('rxjs');
 
 	//render(worldMap, camera, tileAtlas, context, TILE_SIZE)
 	var camRender = R.curry(render)(worldMap, tileAtlas, context, TILE_SIZE);
-	var keyDown = keyDownObservable(canvas);
-	var keyUp = keyUpObservable(canvas);
 	var speed = 4;
+	var keyDown = controller.keyDownObservable(canvas);
+	var keyUp = controller.keyUpObservable(canvas);
 	var curDir = {x:0, y:0};
-	var addDir = (dir1, dir2) => {
-		return {x: (dir1.x | dir2.x), y: (dir1.y | dir2.y)}
-	}
-	var remDir = (dir1, dir2) => {
-		return {x: (dir1.x ^ dir2.x), y: (dir1.y ^ dir2.y)}
-	}
-	var isInBounds = (val, max, min) => val < max && val > min; 
-	var updateCam = (cam, changeInPos, speed) => {
-		var cpy = Object.assign({}, cam);
-		var newX = cam.x + (changeInPos.x * speed);
-		var newY = cam.y + (changeInPos.y * speed);
-		if (isInBounds(newX, cam.maxX, 0)) { 
-			cpy.x = newX; 
-		}
-		if (isInBounds(newY, cam.maxY, 0)) { 
-			cpy.y = newY; 
-		}
-		return cpy;
-	}
 	keyDown.subscribe(e => {
-		curDir = addDir(e, curDir);
+		curDir = controller.addDir(e, curDir);
 	});
 	keyUp.subscribe(e => {
-		curDir = remDir(curDir, e); 
+		curDir = controller.remDir(curDir, e); 
 	});
 
 	var start = null;
 	var update = (timestep) => {
 		var progress = timestep - start; 
 		if (!(curDir.x === 0 && curDir.y === 0)) {
-			camera = updateCam(camera, curDir, speed);
+			camera = controller.updateCam(camera, curDir, speed);
 		}
 		camRender(camera);
 		window.requestAnimationFrame(update);
