@@ -1,5 +1,9 @@
 const R = require('ramda'); 
 
+/*
+ * Functions related to rendering the world 
+ */
+
 function renderWorld(worldMap, tileAtlas, context, tsize, camera) {
 	var colRange = visibleRange(camera.x, camera.width, tsize);
 	var rowRange = visibleRange(camera.y, camera.height, tsize);
@@ -64,10 +68,13 @@ var rowColValToXYVal = R.curry((tsize, cam, startRow, startCol, rowColVal) => {
 	}
 })
 
-var renderImage = R.curry((tsize, ctx, tatlas, XYVal) => {
-	ctx.fillStyle = tatlas.get(XYVal.val)
-	ctx.fillRect(XYVal.x, XYVal.y, tsize, tsize) 
-})
+var renderImage = R.curry((tsize, ctx, atlas, XYVal) => {
+	ctx.fillStyle = atlas.get(XYVal.val);
+	ctx.fillRect(XYVal.x, XYVal.y, tsize, tsize);
+});
 
-module.exports = renderWorld
+module.exports = {
+	renderWorld,
+	renderImage
+};
 

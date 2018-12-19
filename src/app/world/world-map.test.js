@@ -33,7 +33,6 @@ test('idxToCoord should take in row col and output correct x & y to render img',
 test("worldToScreen should get screen x, y from x, y within canvas", () => {
   expect(worldToScreen({x: 0, y: 1}, {x: 0, y: 1})).toEqual({x: 0, y: 0});
   expect(worldToScreen({x: 3, y: 2}, {x: 1, y: 1})).toEqual({x: 2, y: 1});
-  expect(worldToScreen({x: }))
 });
 
 test("screenToWorld should take screen x, y and return x, y within canvas",  () => {
@@ -55,5 +54,3 @@ test("shouldDraw should take index and return whether tile should be drawn", () 
   expect(shouldDraw(cam, { x: 3, y: 3 })).toBe(false);
   expect(shouldDraw(cam, { x: 4, y: 0 })).toBe(false);
 });
-
-test("idxToXY should take a camera and an index and generate")
