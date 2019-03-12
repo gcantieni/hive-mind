@@ -67,6 +67,13 @@ Monocultures that slowly spread and destroy flowers...
 * [x] Represent world as tilemap
 * [x] There is both a logical representationo and a visual representation
 * [x] Can represent multiple layers
+* [x] Can scroll the map
+#### Entities
+* [x] Hold all entities in datastructure
+* [ ] Entities can be filtered
+* [ ] Entities can move
+* [ ] Entities can move while camera moves
+* [ ] Entities can move but be blocked
 #### flowers
 * [ ] Flowers exist
 #### bees

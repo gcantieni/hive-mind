@@ -2,67 +2,68 @@ const R = require('ramda');
 
 // entities are prob symmetrical and thus don't need both width and height
 const ENTITY_SIZE = 10;
-// maps entity id to entity 
-const entityAtlas = new Map();
 
-var curEntityID = 0;
-//var entities = new Map();
-
+var entityAtlas = new Map();
 entityAtlas.set(0, 'Black'); 
 
-function addEntity(value, startX, startY, size, entities) {
-	var newEnt = { id: curEntityID, val: value, x: startX, y: startY, size };
-	entities.set(curEntityID, newEnt);
-	curEntityID++;
-	return { entities, newEnt };
-}
-
-function renderEntities(ctx, cam, entities) {
-	var renderEntityPartial = renderEntity(ctx, entityAtlas);
-	var adjustedEntityXYPartial = adjustedEntityXY(cam);
-	var filterPartial = filterVisibleEntities(cam);
-
-	R.compose(
-		R.map(renderEntityPartial), 
-		R.map(adjustedEntityXYPartial), 
-		filterPartial)(entities);
-}
+const renderEntities = ( ctx, cam, entities ) => 
+    entities
+      .filter( isWithinCam( cam ) )
+      .forEach( renderEntity( ctx, cam ) );
 
 // any entity with any part visible should return true 
 // doesn't check that cam is not misplaced
 // i.e. cam could be in a position where the entity
 // would be beyond maxX
 var isWithinCam = R.curry(
-	(cam, pos) => {
-		return pos.x < cam.x + cam.width &&
-			pos.x + pos.size > cam.x && 
-			pos.y < cam.y + cam.height &&
-			pos.y + pos.size > cam.y;
-	});
+    ( cam, pos ) => 
+            pos.x < cam.x + cam.width &&
+            pos.x + ENTITY_SIZE > cam.x && 
+            pos.y < cam.y + cam.height &&
+            pos.y + ENTITY_SIZE > cam.y );
 
-// [ entities ] --> [ entities within cam ] 
-var filterVisibleEntities = R.curry((cam, ent) =>  {
-	return R.filter(isWithinCam(cam), ent);
-});
+var renderEntity = R.curry(
+    ( ctx, cam, entity ) => {
+        ctx.fillStyle = entityAtlas.get( entity.val );
+        ctx.fillRect( entity.x - cam.x, entity.y - cam.y, ENTITY_SIZE, ENTITY_SIZE ); } );
 
+var update = ( allEntities ) => allEntities.map( updateEntityPos );
 
-var renderEntity = R.curry((ctx, atlas, XYVal) => {
-	ctx.fillStyle = atlas.get(XYVal.val);
-	ctx.fillRect(XYVal.x, XYVal.y, XYVal.size, XYVal.size);
-});
+var updateEntityPos = function(ent) {
+// target shoud be something with x and y values
+    var direction = {
+            x: ent.target.x - ent.x,
+            y: ent.target.y - ent.y
+    };
+    var distanceToTarget = Math.sqrt(
+            direction.x * direction.x + direction.y * direction.y );
 
-var adjustedEntityXY = R.curry(
-	(cam, entity) => {
-		var cpy = Object.assign({}, entity);
-		cpy.x -= cam.x;
-		cpy.y -= cam.y;
-		return cpy;
-	}
-);
+    if ( distanceToTarget === 0 )
+            return ent;
+
+    // normalize
+    direction.x = direction.x / distanceToTarget;
+    direction.y = direction.y / distanceToTarget;
+
+    var cpy = Object.assign( {}, ent );
+    cpy.x = cpy.x + direction.x * ent.speed;
+    cpy.y = cpy.y + direction.y * ent.speed;
+
+    if ( overshotTarget( ent.target.x, ent.x, cpy.x ) ) {
+            cpy.x = ent.target.x;	
+    }
+    if ( overshotTarget( ent.target.y, ent.y, cpy.y ) ) {
+            cpy.y = ent.target.y;	
+    }
+
+    return cpy;
+};
+
+var overshotTarget = ( target, old, updated ) => 
+    ( old < target && updated > target ) ||
+    ( old > target && updated < target );
 
 module.exports = {
-	addEntity,
-	filterVisibleEntities,
-	adjustedEntityXY,
-	renderEntities
-}
+    renderEntities,
+    update,
+};
