@@ -1,4 +1,5 @@
 const R = require('ramda'); 
+const common = require('../common.js');
 
 /*
  * Functions related to rendering the world 
@@ -18,17 +19,9 @@ const renderWorld = (world, context, camera) =>
                     x: row * TILE_SIZE,
                     y: col * TILE_SIZE
                 };
-                if (isVisible(tilePos, camera)) {
-                    renderTile(tile, tilePos, camera, context);
-                }
+                if ( common.isVisible( camera, TILE_SIZE, tilePos ) )
+                    renderTile( tile, tilePos, camera, context );
             })));
-
-// given position, is it within the camera?
-const isVisible = (pos, cam) =>
-      pos.x + TILE_SIZE >= cam.x &&
-      pos.x < cam.x + cam.maxX &&
-      pos.y + TILE_SIZE >= cam.y &&
-      pos.y < cam.y + cam.maxY;
                                    
 const renderTile = (tile, tilePos, camera, context) => {
     context.fillStyle = tileAtlas.get(tile);

@@ -1,4 +1,5 @@
 const R = require('ramda');
+const common = require('../common.js');
 
 // entities are prob symmetrical and thus don't need both width and height
 const ENTITY_SIZE = 10;
@@ -8,19 +9,8 @@ entityAtlas.set(0, 'Black');
 
 const renderEntities = ( ctx, cam, entities ) => 
     entities
-      .filter( isWithinCam( cam ) )
+      .filter( common.isVisible( cam, ENTITY_SIZE ) )
       .forEach( renderEntity( ctx, cam ) );
-
-// any entity with any part visible should return true 
-// doesn't check that cam is not misplaced
-// i.e. cam could be in a position where the entity
-// would be beyond maxX
-var isWithinCam = R.curry(
-    ( cam, pos ) => 
-            pos.x < cam.x + cam.width &&
-            pos.x + ENTITY_SIZE > cam.x && 
-            pos.y < cam.y + cam.height &&
-            pos.y + ENTITY_SIZE > cam.y );
 
 var renderEntity = R.curry(
     ( ctx, cam, entity ) => {
